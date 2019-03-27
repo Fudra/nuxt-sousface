@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative rounded-full h-48 w-48 border border-teal"
+    class="absolute rounded-full h-24 w-24 border border-teal"
     :style="transition"
   />
 </template>

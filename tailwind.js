@@ -190,6 +190,7 @@ module.exports = {
 
   fonts: {
     'sans': [
+      'Rajdhani',
       'system-ui',
       'BlinkMacSystemFont',
       '-apple-system',
