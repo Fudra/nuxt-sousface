@@ -1,6 +1,7 @@
 <template>
   <div
-    class="relative float-left w-8 h-8 p-2 bg-grey-light opacity-2 hover:bg-teal"
+    class="relative float-left w-9 h-9 m-2px opacity-2 bg-grey hover:bg-teal hover:opacity-80"
+    :class="isActive"
   />
 </template>
 
@@ -9,7 +10,14 @@ export default {
   name: 'NavigationTile',
   props: {},
   data() {
-    return {};
+    return {
+      active: false,
+    };
+  },
+  computed: {
+    isActive() {
+      return this.active ? 'opacity-90' : 'opacity-30';
+    },
   },
 };
 </script>
