@@ -2,7 +2,6 @@ export const state = () => ({
   current: 1,
 });
 
-
 const type = {
   SET_PAGE: 'SET_PAGE',
 };
@@ -19,9 +18,8 @@ export const getters = {
   },
 };
 
-
 export const actions = {
-  setCurrentPage({ commit }, page) {
+  setCurrentPage({ commit, }, page) {
     commit(type.SET_PAGE, page);
   },
 };
