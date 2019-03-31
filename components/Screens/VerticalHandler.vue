@@ -11,6 +11,7 @@
 <script>
 /* eslint-disable */
   import { mapGetters, mapActions } from 'vuex';
+  import TWEEN from '@tweenjs/tween.js';
 
   export default {
     name: 'VerticalHandler',
@@ -22,6 +23,9 @@
         },
         position: {},
         autoUpdatePosition: true,
+
+        // Tweening time in ms
+        tweenDuration: 1000,
       };
     },
     computed: {
@@ -40,6 +44,7 @@
       },
       handleDragEnd() {
         this.autoUpdatePosition = true;
+        this.transitionToOneSide();
       },
       constrainBoundaries(percentage) {
         // todo move to mixin or helper
@@ -56,6 +61,36 @@
         this.screen.width = window.innerWidth;
         this.screen.center = window.innerWidth / 2;
       },
+      transitionToOneSide() {
+        if(this.width < 50) {
+          this.tween(this.width, 0);
+        } else {
+          this.tween(this.width, 100);
+        }
+      },
+      // source: https://alligator.io/vuejs/tween-values-tweenjs/
+      tween(start, end) {
+        let frameHandler;
+
+        const animate = (currentTime) => {
+          TWEEN.update(currentTime);
+          frameHandler = requestAnimationFrame(animate);
+        };
+
+        const myTween = new TWEEN.Tween({ tweeningValue: start })
+          .to({ tweeningValue: end }, this.tweenDuration)
+          // .easing(TWEEN.Easing.Cubic)
+          .onUpdate((value) => {
+            this.setScreenWidth(+value.tweeningValue.toFixed(2));
+          })
+          .onComplete(() => {
+            cancelAnimationFrame(frameHandler);
+          })
+          .start();
+        console.log(myTween);
+
+        frameHandler = requestAnimationFrame(animate);
+      },
     },
     mounted() {
       this.setInnerDimensions();
@@ -64,6 +99,7 @@
       width: {
         handler() {
           if(!this.autoUpdatePosition) return;
+
           this.updateHandlerPosition();
         },
         immediate: true,
