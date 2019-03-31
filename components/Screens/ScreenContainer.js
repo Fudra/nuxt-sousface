@@ -12,8 +12,8 @@ export default {
   },
   render() {
     return this.$scopedSlots.default({
-      width: `width: ${this.width}%`,
-      height: `height: ${this.height}%`,
+      width: this.width,
+      height: this.height,
     });
   },
 };

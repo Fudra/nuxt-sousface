@@ -1,7 +1,7 @@
 <template>
   <section
     class="absolute w-screen h-screen overflow-hidden"
-    :style="width"
+    :style="screenSize"
   >
     <div class="w-screen h-screen flex justify-center items-center">
       <slot />
@@ -14,12 +14,20 @@ export default {
   name: 'Screen',
   props: {
     width: {
-      type: String,
-      default: '',
+      type: Number,
+      default: -1,
     },
     height: {
-      type: String,
-      default: '',
+      type: Number,
+      default: -1,
+    },
+  },
+  computed: {
+    screenSize() {
+      return {
+        width: this.width === -1 ? null : this.width + '%',
+        height: this.height === -1 ? null : this.height + '%',
+      };
     },
   },
 };

@@ -9,7 +9,7 @@ const type = {
   SET_SCREEN_HEIGHT: 'SET_SCREEN_HEIGHT',
 };
 
-export const mutation = {
+export const mutations = {
   [type.SET_SCREEN_WIDTH](state, screenWidth) {
     state.width = screenWidth;
   },
