@@ -3,7 +3,7 @@
     v-draggabilly="{ axis: 'x', containment: '.wrapper' }"
     v-draggabilly-on:dragMove="handleDragMove"
     v-draggabilly-on:dragEnd="handleDragEnd"
-    class="absolute h-screen w-2 bg-blue hover:bg-blue-light z-50 cursor-col-resize"
+    class="absolute h-screen w-2 bg-teal opacity-80 hover:opacity-100 z-50 cursor-col-resize"
     :style="position"
   />
 </template>
@@ -53,8 +53,9 @@
         return percentage;
       },
       updateHandlerPosition() {
+        let move = this.width > 90 ? '-.5rem' : '0.0001rem';
         this.position = {
-          left: `calc(${ this.width }% - .25rem)`,
+          left: `calc(${ this.width }% + ${ move })`,
         };
       },
       setInnerDimensions() {
@@ -87,7 +88,6 @@
             cancelAnimationFrame(frameHandler);
           })
           .start();
-        console.log(myTween);
 
         frameHandler = requestAnimationFrame(animate);
       },
